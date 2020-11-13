@@ -19,7 +19,7 @@ from octobot.api.backtesting import create_independent_backtesting, initialize_a
     check_independent_backtesting_remaining_objects, stop_independent_backtesting, join_independent_backtesting, \
     get_independent_backtesting_exchange_manager_ids
 from octobot.backtesting.abstract_backtesting_test import DATA_FILES
-from octobot_commons.asyncio_tools import ErrorContainer
+from octobot_commons.asyncio_tools import ErrorContainer, wait_asyncio_next_cycle
 from octobot_trading.api.exchange import get_exchange_manager_from_exchange_id
 from octobot_trading.api.orders import get_open_orders
 from octobot_trading.api.trades import get_trade_history
@@ -55,6 +55,8 @@ async def run_independent_backtestings_with_memory_check(config, tentacles_setup
             await stop_independent_backtesting(backtesting, memory_check=True)
             await asyncio.wait_for(backtesting.post_backtesting_task, 5)
             asyncio.get_event_loop().call_soon(check_independent_backtesting_remaining_objects, backtesting)
+            for _ in range(50):
+                await wait_asyncio_next_cycle()
             await asyncio.create_task(error_container.check())
     except Exception as e:
         if backtesting is not None:
