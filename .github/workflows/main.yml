@@ -104,7 +104,7 @@ jobs:
     - name: Pytests
       run: |
         pytest --cov=. --cov-config=.coveragerc --durations=0 -rw tests
-        pytest --durations=0 -rw tentacles
+        pytest --durations=0 -rw tentacles/Trading/Mode/staggered_orders_trading_mode/tests/test_staggered_orders_trading_mode.py::test_run_independent_backtestings_with_memory_check
 
     - name: Publish coverage
       if: matrix.type == 'sources'
