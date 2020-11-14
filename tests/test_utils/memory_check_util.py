@@ -52,7 +52,7 @@ async def run_independent_backtestings_with_memory_check(config, tentacles_setup
             # ensure at least one order is either open or got filled
             assert trades + open_orders
             trades = open_orders = exchange_manager = None  # prevent memory leak
-            await asyncio.wait_for(backtesting.post_backtesting_task, 5)
+            await asyncio.sleep(5)
             await stop_independent_backtesting(backtesting, memory_check=True)
             asyncio.get_event_loop().call_soon(check_independent_backtesting_remaining_objects, backtesting)
             await asyncio.create_task(error_container.check())
