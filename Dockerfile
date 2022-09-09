@@ -1,4 +1,4 @@
-FROM python:3.7.4-slim
+FROM python:3.9.14-slim
 
 ENV TENTACLE_DIR="tentacles" \
     OCTOBOT_DIR="octobot" \
