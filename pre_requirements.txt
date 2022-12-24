@@ -3,3 +3,4 @@ Cython==0.29.5
 lxml==4.3.1
 urllib3==1.25.3
 Twisted==20.3.0 # to be removed (python-binance)
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
