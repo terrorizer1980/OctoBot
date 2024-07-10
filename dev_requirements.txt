@@ -8,3 +8,4 @@ coverage==4.5.2
 coveralls==1.6.0
 
 twine
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
